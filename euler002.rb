@@ -28,7 +28,7 @@ def euler002
 	base = 0
 
 	totel_list.each_with_index do |item , index|
-		 base += item if index % 2 == 0
+		 base += item if item % 2 == 0
 	end
 	base
 end
