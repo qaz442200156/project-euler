@@ -33,14 +33,18 @@ http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%208
 def get_tag_prime(input_data,slice_space)
 str_arr = input_data.delete!("\n").to_i.to_s
 max_value=0
-for x in (0..(str_arr.length / slice_space)) do
+get_group=[]
+nums = []
+
+for x in (0..str_arr.length) do
 	current_value = 1;
-	str_arr[(x*slice_space),slice_space].split('').reduce(0){|m,index| current_value *= index.to_i }
-	if current_value >= max_value
-	max_value = current_value
+	get_group = str_arr[x,slice_space].split('')
+	if get_group.include?('0') == false
+	get_group.reduce(0){|m,index| current_value *= index.to_i }
+	nums << current_value
 	end
 end
-max_value
+nums.max
 end
 
 def euler008
