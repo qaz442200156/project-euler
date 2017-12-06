@@ -28,7 +28,6 @@ def in_words(int)
 	  if int% 100 != 0
 	   return str + in_words(int/num) + " #{name} and " + in_words(int%num)
 	  end
-	   puts str + in_words(int/num) + " #{name} " + in_words(int%num)
       return str + in_words(int/num) + " #{name} " + in_words(int%num)
     end
   end
