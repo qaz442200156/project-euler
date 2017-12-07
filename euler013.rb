@@ -212,5 +212,5 @@ EOT
 
 def euler013
 all = EULER013.split("\n")
-all.reduce(0){|m,x| m += x.to_i}.to_s[0,10]
+all.reduce(0){|m,x| m += x.to_i}.to_s[0,10].to_i
 end

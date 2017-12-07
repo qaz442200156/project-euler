@@ -12,7 +12,7 @@ def getmax_palindromic_num(n)
 base_max_num = 10 ** n-1
 cacu_num = max_num = base_max_num
 base_value = max_num * cacu_num
-cur_value =(max_num * cacu_num)
+cur_value = base_value
 pnum_list = []
 loop do
 	cur_value =(max_num * cacu_num)
@@ -35,7 +35,7 @@ end
 def check_palindromic_num(_pnum)
 length = _pnum.length / 2
 check_ans = true
-	_pnum.each_with_index do |item ,index|
+	_pnum.each_index do |index|
 		if index < length
 			if _pnum[index] != _pnum[_pnum.length-1-index]
 				check_ans = false
