@@ -24,7 +24,7 @@ def euler014
 	index = 0
 	index_value = 0
 	tag = 1000_000
-	tag.downto(13) { |x| 
+	((tag/2).to_i..tag).select{|v| v % 2 != 0 }.map{ |x| 
 		cacu_value = x
 		counter = 0
 		loop do

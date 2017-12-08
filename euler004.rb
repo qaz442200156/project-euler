@@ -14,20 +14,22 @@ cacu_num = max_num = base_max_num
 base_value = max_num * cacu_num
 cur_value = base_value
 pnum_list = []
+#cu_pnum_list = (cur_value-(cur_value*0.25).to_i..cur_value).to_a.select{|x| check_palindromic_num(x.to_s.split(''))}
+
 loop do
 	cur_value =(max_num * cacu_num)
 	pnum = cur_value.to_s.split('')
 	if check_palindromic_num(pnum) == true
 		pnum_list << cur_value if pnum_list.include?(cur_value) == false
 	else
-		if cacu_num < 2
+		if cacu_num < (base_max_num*0.7).to_i
 			max_num -= 1
 			cacu_num = base_max_num
 			base_value = max_num * cacu_num
 		end
 	end
 		cacu_num -= 1
-	break if max_num < 1
+	break if max_num < (base_max_num*0.7).to_i
 end
 pnum_list.max
 end
