@@ -32,18 +32,14 @@ http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%208
 
 def get_tag_prime(input_data,slice_space)
 str_arr = input_data.delete!("\n").to_i.to_s
-max_value=0
 get_group=[]
 nums = []
-
-for x in (0..str_arr.length) do
+(0..str_arr.length).select{|x| str_arr[x,slice_space].split('').include?('0') == false}.map{|value|
 	current_value = 1;
-	get_group = str_arr[x,slice_space].split('')
-	if get_group.include?('0') == false
-	get_group.reduce(0){|m,index| current_value *= index.to_i }
+	str_arr[value,slice_space].split('').reduce(0){|m,index| current_value *= index.to_i }
 	nums << current_value
-	end
-end
+}
+
 nums.max
 end
 

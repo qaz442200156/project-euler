@@ -9,26 +9,14 @@ http://odz.sakura.ne.jp/projecteuler/index.php?cmd=read&page=Problem%202
 
 =end
 
-def fib_num(n)
-	if(n<=1)
-		n
-	else
-		n = fib_num(n-1) + fib_num(n-2)
-	end
-end
+
 
 def euler002
-	base = 0
-	totel_list = []
+	totel_list = [1,2]
 	loop do
-		base += 1
+		totel_list << (totel_list[-1]+totel_list[-2])
 		break if totel_list.last.to_i > 4000_000
-		totel_list << fib_num(base)
 	end
-	base = 0
 
-	totel_list.each_with_index do |item , index|
-		 base += item if item % 2 == 0
-	end
-	base
+	totel_list.select{|x| x% 2 == 0}.reduce(0){|m,v| m+=v}
 end

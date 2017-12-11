@@ -35,8 +35,7 @@ end
 
 def euler017
 all_words = ""
-for x in (1..1000) do 
-	all_words += in_words(x)
-end
+(1..1000).to_a.reduce(0){|m,x| all_words+= in_words(x)}
 all_words.delete(" ").length
+
 end
