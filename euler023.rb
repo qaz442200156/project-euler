@@ -20,34 +20,34 @@ def get_div_c(num)
 	in_num = num
 	primes = []
 	div = Prime.prime_division(num)
-	div.each_with_index do |value,x| 
-		preme_per_sum = 1
-		value[1].times do |i|
-			preme_per = value[0] ** (i+1)
-			preme_per_sum *= preme_per
-			div.each_with_index do |_value,_x| 
-				prime_value = (preme_per * _value[0])
-				if  value[0] != _value[0]
-				preme_per_sum *= _value[0]
-				end
-				primes << (preme_per_sum) if preme_per_sum != num and (preme_per_sum) < num and primes.include?(preme_per_sum) == false
-				primes << (prime_value) if prime_value != num and (prime_value) < num and value[0] != _value[0] and primes.include?(prime_value) == false
-			end
+	if Prime.instance.prime?(num)
+	return 0
+	end
 
-			primes << preme_per if preme_per != num and primes.include?(preme_per) == false
-			in_num /= value[0]
-			primes << in_num if in_num != num and primes.include?(in_num) == false
-			break if in_num == 1
-		end		
-		break if in_num == 1
+	div.each_with_index do |value,x|
+		value[1].times do |i|
+			f_value = div[x][0] ** (i+1)
+				div.each_with_index do |_value,_x| 
+					sum_a_a = 1
+					if _value[0] != div[x][0]
+						sum_a_a = f_value * _value[0]
+					end
+					div_per_v = (in_num / sum_a_a)
+					primes << div_per_v if primes.include?(div_per_v) == false and in_num % sum_a_a == 0 and div_per_v <= num/2
+					primes << sum_a_a if primes.include?(sum_a_a) == false and sum_a_a <= num/2
+				end
+			primes << f_value if primes.include?(f_value) == false and f_value <= num/2
+			div_v = (in_num / f_value)
+			primes << div_v if primes.include?(div_v) == false and in_num % f_value == 0 and div_v <= num/2
+		end
 	end
 	
 	sum = (primes.reduce(0){|m,x| m += x})
-
-	if sum > num and num != sum and Prime.instance.prime?(num) == false
+	if sum > num and num != sum
 		NON_List[num.to_s] = num if NON_List.key?(num.to_s) == false
-		return sum
+		return num
 	else
+	
 		return 0
 	end
 end
@@ -57,21 +57,37 @@ end
 def euler023
 
 	normal_value =0
-	(1..28123).to_a.map{|x|#28123
-		if get_div_c(x) == 0
-			is_ok = true
-			
-			NON_List.each {|key,value| 
-				 if NON_List.key?((x-value).to_s)
-					 is_ok = false
-					 break
-				 end
+	all_group = (1..28123).to_a.each{|all_num| get_div_c(all_num)}#28123
+	NON_List.sort.uniq
+
+	all_group.each{|item|
+		is_ok = true
+		range = NON_List.values.select{|lv| lv <= item and item - lv > 0}
+		if range != nil and range != []
+			if item - range.min > 10_000
+				range.reverse_each{|r_value|
+					per_cacu = item - r_value
+					break if per_cacu < 0 or r_value < per_cacu 
+					if NON_List.key?(per_cacu.to_s)
+						is_ok = false
+					end
+				}
+			else
+				range.each{|value|
+				per_cacu = item - value
+				break if per_cacu < 0 or value > per_cacu
+				if NON_List.key?(per_cacu.to_s)
+					is_ok = false
+				end
 			}
-			if is_ok
-			normal_value += x 
 			end
+			
+		end
+		
+		if is_ok
+			normal_value += item
 		end
 	}
-	#puts "#{NON_List}"
+	
 	normal_value
 end
