@@ -23,12 +23,12 @@ def in_words(int)
       return str + "#{name}"      
     elsif int < 100 && int/num > 0
       return str + "#{name}" if int%num == 0
-      return str + "#{name} " + in_words(int%num)
+      return str + "#{name}" + in_words(int%num)
     elsif int/num > 0
 	  if int% 100 != 0
-	   return str + in_words(int/num) + " #{name} and " + in_words(int%num)
+	   return str + in_words(int/num) + "#{name}and" + in_words(int%num)
 	  end
-      return str + in_words(int/num) + " #{name} " + in_words(int%num)
+      return str + in_words(int/num) + "#{name}" + in_words(int%num)
     end
   end
 end
@@ -36,6 +36,6 @@ end
 def euler017
 all_words = ""
 (1..1000).to_a.reduce(0){|m,x| all_words+= in_words(x)}
-all_words.delete(" ").length
+all_words.length
 
 end

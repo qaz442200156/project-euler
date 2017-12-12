@@ -32,10 +32,11 @@ end
 def euler025
 fib_arr = [1,1]
 index = 2
+limit = 10 ** 3 - 1
 loop do
 	fib_arr << fib(fib_arr,index)
-	break if fib_arr[-1] > 999_999
 	index += 1
+	break if fib_arr[-1].size > limit
 end
 index
 end
